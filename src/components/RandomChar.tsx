@@ -31,7 +31,7 @@ export default class RandomChar extends Component<any,any> {
         culture: null
     }
     updateChar() {
-        const id = 130;
+        const id = Math.floor(Math.random()*1000+25);
         this.gotService.getCharacter(id)
             .then((char) => {
                 this.setState({
