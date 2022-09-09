@@ -4,9 +4,6 @@ export default class ItemList extends Component{
         return (
             <>
                 <ul className="item-list list-group">
-                    <li className="list-group-item list-group-item-primary ">
-                        Random Character
-                    </li>
                     <li className="list-group-item">
                         John Snow
                     </li>

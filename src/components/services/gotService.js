@@ -3,7 +3,13 @@ export default class GotService {
         this._apiBase = 'https://anapioficeandfire.com/api'
     }
     async getResource(url) {
-        const res = await fetch(url)
+        const fetchUrl = this._apiBase + url;
+        const res = await fetch(fetchUrl,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status: ${res.status}`);
         }

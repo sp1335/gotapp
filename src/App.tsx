@@ -3,6 +3,7 @@ import { Col, Row, Container } from 'reactstrap';
 import CharDetails from './components/CharDetails';
 import Header from './components/Header';
 import ItemList from './components/ItemList'
+import RandomChar from './components/RandomChar'
 
 function App() {
   return (
@@ -16,8 +17,12 @@ function App() {
             <ItemList />
           </Col>
           <Col>
-            <CharDetails></CharDetails>
+            <CharDetails/>
           </Col>
+          <Col>
+            <RandomChar/>
+          </Col>
+          
         </Row>
       </Container>
     </>

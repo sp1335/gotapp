@@ -15,7 +15,13 @@ const CDBlock = styled.div`
         font-size: 26px;
     }
 `
-export default class CharDetails extends Component {
+
+export default class RandomChar extends Component<any,any> {
+    constructor(props:any) {
+        super(props);
+        this.updateChar()
+    }
+    
     gotService = new gotService();
     state = {
         name: null,
@@ -24,12 +30,26 @@ export default class CharDetails extends Component {
         died: null,
         culture: null
     }
+    updateChar() {
+        const id = 130;
+        this.gotService.getCharacter(id)
+            .then((char) => {
+                this.setState({
+                    name: char.name,
+                    gender: char.gender,
+                    born: char.born,
+                    died: char.died,
+                    culture: char.culture
+                })
+            })
+            
+    }
     render() {
         const { name, gender, born, died, culture } = this.state
         return (
             <>
                 <CDBlock className='rounded'>
-                    <h4>{name}</h4>
+                    <h4>Random Character: {name}</h4>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item d-flex justify-content-between">
                             <span className="term">Gender</span>
