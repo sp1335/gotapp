@@ -4,8 +4,8 @@ export default class GotService {
     }
     async getResource(url) {
         const fetchUrl = this._apiBase + url;
-        const res = await fetch(fetchUrl,{
-            headers:{
+        const res = await fetch(fetchUrl, {
+            headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
@@ -15,11 +15,52 @@ export default class GotService {
         }
         return await res.json()
     }
-    getAllCharacters(){
-        return this.getResource(`/characters?page=5&pageSize=10`)
+    async getAllCharacters() {
+        const res = await this.getResource(`/characters?page=5&pageSize=10`)
+        return res.map(this._transformCharacter)
     }
-    getCharacter(id){
-        return this.getResource(`/characters/${id}`)
+    async getCharacter(id) {
+        const char = await this.getResource(`/characters/${id}`)
+        return this.transformCharacter(char)
+    }
+    getAllHouses() {
+        return this.getResource(`/houses/`)
+    }
+    getAllHouse(id) {
+        return this.getResource(`/houses/${id}`)
+    }
+    getAllBooks() {
+        return this.getResource(`/books/`)
+    }
+    getBook(id) {
+        return this.getResource(`/books/${id}`)
     }
 
+    transformCharacter(char) {
+        return {
+            name: char.name,
+            gender: char.gender,
+            born: char.born,
+            died: char.died,
+            culture: char.culture
+        }
+    }
+    _transformHouse(house) {
+        return {
+            name: house.name,
+            region: house.region,
+            words: house.words,
+            titles: house.titles,
+            overlord: house.overlord,
+            ancestralWeapons: house.ancestralWeapons
+        }
+    }
+    _transformBook(book) {
+        return {
+            name: book.name,
+            numberOfPages: book.numberOfPages,
+            publisher: book.publisher,
+            released: book.released
+        }
+    }
 }
