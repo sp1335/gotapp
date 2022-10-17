@@ -17,7 +17,7 @@ export default class GotService {
     }
     async getAllCharacters() {
         const res = await this.getResource(`/characters?page=5&pageSize=10`)
-        return res.map(this._transformCharacter)
+        return res.map(this.transformCharacter)
     }
     async getCharacter(id) {
         const char = await this.getResource(`/characters/${id}`)
@@ -45,7 +45,7 @@ export default class GotService {
             culture: char.culture
         }
     }
-    _transformHouse(house) {
+    transformHouse(house) {
         return {
             name: house.name,
             region: house.region,
@@ -55,7 +55,7 @@ export default class GotService {
             ancestralWeapons: house.ancestralWeapons
         }
     }
-    _transformBook(book) {
+    transformBook(book) {
         return {
             name: book.name,
             numberOfPages: book.numberOfPages,
